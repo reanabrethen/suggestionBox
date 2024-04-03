@@ -49,17 +49,29 @@ async function updateSuggestion(req, res, next){
 async function deleteSuggestion(req, res, next){
     try {
         const {id} = req.params
-    const suggestionDeleted = await Suggestion.findByIdAndDelete(id)
+    const suggestionDeleted = await Suggestion.findByIdAndDelete({_id:id})
     res.json({message: "Suggestion deleted", suggestionDeleted})
     }catch (error){
         res.json({message: error, error: error.message})
     }
 }
 
+
+async function getSuggestionsByAuthor(req, res, next){
+    try {
+        let authorSuggestion = await Suggestion.find({author:req.query.author})
+        res.json({message: "Successfully found", authorSuggestion})
+    } catch (error) {
+        res.json({message: "error", error: error.message})
+    }
+}
+
+
 module.exports = {
     getAllSuggestions,
     createSuggestion,
     getSingleSuggestion,
     updateSuggestion,
-    deleteSuggestion
+    deleteSuggestion,
+    getSuggestionsByAuthor
 }

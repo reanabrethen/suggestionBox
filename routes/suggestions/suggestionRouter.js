@@ -5,7 +5,8 @@ const {
     createSuggestion,
     getSingleSuggestion,
     updateSuggestion,
-    deleteSuggestion
+    deleteSuggestion,
+    getSuggestionsByAuthor
 
 } = require('./controller/suggestionsController')
 
@@ -17,6 +18,8 @@ router.get('/single-suggestion/:id', getSingleSuggestion)
 
 router.put('/update-suggestion/:id', updateSuggestion)
 
-router.delete('/delete-suggestion', deleteSuggestion)
+router.delete('/delete-suggestion/:id', deleteSuggestion)
+
+router.get('/by-author-suggestion', getSuggestionsByAuthor)
 
 module.exports = router
